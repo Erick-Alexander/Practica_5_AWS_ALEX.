@@ -1,14 +1,15 @@
 """
-PRÁCTICA 5: PIPELINE ETL AUTOMATIZADO CON SALIDA PARQUET Y CSV
+PRÁCTICA 5: PIPELINE ETL AUTOMATIZADO CON SALIDA PARQUET Y CSV A AWS S3
 """
 
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
+import boto3
 import os
 
 def pipeline_etl_completo():
-    print("=== 1. FASE DE EXTRACCIÓN (Extract - Raw Data Staging)===")
+    print("=== 1. FASE DE EXTRACCIÓN (Extract - Raw Data Staging) ===")
     raw_data = {
         'id_cliente': [101, 102, 103, 104, 105, 106, 107, 108],
         'cliente': ['Ana Gómez', 'Carlos Ruiz', 'Beatriz Peña', 'David Soto', 'Elena Lara', 'Fernando Mas', 'Gloria Ríos', 'Hugo Vega'],
@@ -47,21 +48,47 @@ def pipeline_etl_completo():
     print(df_raw.to_string(index=False))
     print("\n")
 
-    print("=== 3. FASE DE CARGA (Load - Generación de Archivos Target) ===")
+    print("=== 3. FASE DE CARGA (Load - Exportación a AWS S3 y Local) ===")
     
-    # Aquí es donde se realiza la exportación a Parquet y CSV en el buckets
+    BUCKET_NAME = 'aws-academy-datacenter-bucket-23-02-001'
+    
+    # Aquí es donde se realiza la exportación a Parquet y CSV de forma local
     parquet_path = "etl_output.parquet"
     df_raw.to_parquet(parquet_path, index=False, engine='pyarrow')
     size_parquet = os.path.getsize(parquet_path)
-    print(f"[OK] Archivo Parquet generado: '{parquet_path}' ({size_parquet} bytes)")
+    print(f"[OK] Archivo Parquet generado localmente: '{parquet_path}' ({size_parquet} bytes)")
     
-    # Aquí es donde se completa la exportación a CSV y se obtiene el tamaño del archivo ya generado.
     csv_path = "etl_output.csv"
     df_raw.to_csv(csv_path, index=False)
     size_csv = os.path.getsize(csv_path)
-    print(f"[OK] Archivo CSV generado:     '{csv_path}' ({size_csv} bytes)")
+    print(f"[OK] Archivo CSV generado localmente:     '{csv_path}' ({size_csv} bytes)")
     
-    print("=== COMPARATIVA DE ALMACENAMIENTO ===")
+    # Aquí se encuentran las credenciales necesarias para la conexión XD.
+    AWS_ACCESS_KEY_ID = "INGRESA TU LLAVE DE ACCESO DE AWS SAMURAI"
+    AWS_SECRET_ACCESS_KEY = "INGRESA TU LLAVE SECRETA DE ACCESO DE AWS SAMURAI"
+    AWS_SESSION_TOKEN = "INGRESA TU TOKEN DE SESIÓN DE AWS SAMURAI"
+
+    print(f"\n--> Conectando a AWS S3 y cargando al bucket: '{BUCKET_NAME}'...")
+    try:
+        s3_client = boto3.client(
+            's3',
+            region_name='us-east-1',
+            aws_access_key_id=AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+            aws_session_token=AWS_SESSION_TOKEN
+        )
+        
+    # Aquí es donde se realiza la exportación a Parquet en el buckets.
+        s3_client.upload_file(parquet_path, BUCKET_NAME, f"processed/{parquet_path}")
+        print(f"[ÉXITO] Archivo Parquet subido a S3: s3://{BUCKET_NAME}/processed/{parquet_path}")
+        
+    # Aquí es donde se realiza la exportación a CSV en el buckets.
+        s3_client.upload_file(csv_path, BUCKET_NAME, f"processed/{csv_path}")
+        print(f"[ÉXITO] Archivo CSV subido a S3:     s3://{BUCKET_NAME}/processed/{csv_path}")
+    except Exception as e:
+        print(f"[ERROR S3] Falló la subida a S3: {e}")
+
+    print("\n=== COMPARATIVA DE ALMACENAMIENTO ===")
     print(f"• Tamaño Parquet: {size_parquet} Bytes")
     print(f"• Tamaño CSV:     {size_csv} Bytes")
 

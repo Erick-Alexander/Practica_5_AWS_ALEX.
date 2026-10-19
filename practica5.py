@@ -50,7 +50,7 @@ def pipeline_etl_completo():
 
     print("=== 3. FASE DE CARGA (Load - Exportación a AWS S3 y Local) ===")
     
-    BUCKET_NAME = 'aws-academy-datacenter-bucket-23-02-001'
+    BUCKET_NAME = 'INGRESA EL NOMBRE DE TU BUCKETS SAMURAI'
     
     # Aquí es donde se realiza la exportación a Parquet y CSV de forma local
     parquet_path = "etl_output.parquet"
@@ -66,7 +66,7 @@ def pipeline_etl_completo():
     # Aquí se encuentran las credenciales necesarias para la conexión XD.
     AWS_ACCESS_KEY_ID = "INGRESA TU LLAVE DE ACCESO DE AWS SAMURAI"
     AWS_SECRET_ACCESS_KEY = "INGRESA TU LLAVE SECRETA DE ACCESO DE AWS SAMURAI"
-    AWS_SESSION_TOKEN = "IQoJb3JpZ2luX2VjEGcaCXVzLXdlc3QtMiJHMEUCIQDCpMyXjI+iJHI12rXNrvDdgEqouMld7qOYcA0PJHlkqgIgAbmb/rPRcIA5bYic6heeIwVQ+FlhzQ1o+9mR+S2kUVMqowIILxABGgwzMDQ5NjU4NjI4OTYiDHewWj33HZw3JDuDViqAAi+LKhSjskpUQcUGLFuMMmHn9QcFPWr2XR1zgw3ZUySiBKwqUCwYdrMkWBr7bAE4iCp44fgWLtltzvodwhLRIlg5lgG/YsctKqJ73QF/s2n5WvB1mC2pxF9kEQKYszrkboCBnAncadGiRCXjm3mjKKcrfncVeAC6qJ6ZiZ5bP+KrepGN5oEWMpu1f7qNPBaBXFYvMsUbPUub9/fcvzak+ckQQ9oN5Sh06T3kfsKB0oentUDIWVXll3Up23jwikShSBr/DMoHshXM+M0vsMfh/KbsopiqNtHffdaYOzaFqcZHY+c6HzZ43zbBvRPohFMcbmpm7HemA/Exa7hLDkYiBwcwtc7Y1gY6nQHj26fvih/aZTwn1/VOQ5GQob3qdSwpSJnxfPhtZwRUWuoJwqB5pyaRz9vgxOuixo65a9odZywmhWHBxXfdaLUpNtCaMoOAc2xLCDvGlVqRHAooprguXMD3uWtSZBVeM82plsK3asQJtUkL1/XEYrK94zWigrkLJr1/SVnTiYxoeDsoW50OhtpPIAaHsMw3MdEgZ42UBn3YxbhJRCkv"
+    AWS_SESSION_TOKEN = "INAGRESA TU TOKEN DE SESIÓN SAMURAI"
 
     print(f"\n--> Conectando a AWS S3 y cargando al bucket: '{BUCKET_NAME}'...")
     try:

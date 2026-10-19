@@ -1,11 +1,13 @@
 # Con estas líneas activas el entorno virtual.
 venv/
 env/
+ENV/
 
 # Con estas líneas tienes el caché de Python.
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
 
 # Con estas extensiones tienes los archivos de salida/binarios temporales del buckets.
 *.parquet
@@ -17,3 +19,8 @@ __pycache__/
 credentials
 
 # Ya no tengo ideas para escribir algo en los archivos XD.
+# Les dejo las configuraciones.
+
+.vscode/
+.idea/
+.DS_Store

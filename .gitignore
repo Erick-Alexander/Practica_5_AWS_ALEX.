@@ -1,0 +1,19 @@
+# Con estas líneas activas el entorno virtual.
+venv/
+env/
+
+# Con estas líneas tienes el caché de Python.
+__pycache__/
+*.pyc
+*.pyo
+
+# Con estas extensiones tienes los archivos de salida/binarios temporales del buckets.
+*.parquet
+*.csv
+
+# Por si acaso dejo estas líneas de credenciales de AWS.
+.aws/
+*.pem
+credentials
+
+# Ya no tengo ideas para escribir algo en los archivos XD.

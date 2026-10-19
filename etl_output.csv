@@ -1,0 +1,9 @@
+id_cliente,cliente,edad,monto_compras,categoria_edad,monto_normalizado,score_promocional
+101,Ana Gómez,20,1200.0,Joven,0.0,0.0
+102,Carlos Ruiz,40,50000.0,Adulto,0.6039603960396039,60.4
+103,Beatriz Peña,60,30000.0,Senior,0.3564356435643565,35.64
+104,David Soto,30,15000.0,Adulto,0.1707920792079208,17.08
+105,Elena Lara,22,3500.0,Joven,0.02846534653465347,2.85
+106,Fernando Mas,55,82000.0,Senior,1.0,100.0
+107,Gloria Ríos,35,27000.0,Adulto,0.3193069306930693,31.93
+108,Hugo Vega,68,45000.0,Senior,0.5420792079207921,54.21
